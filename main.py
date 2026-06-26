@@ -106,3 +106,19 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+import os
+import requests
+
+TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+
+def send_telegram(msg):
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    data = {
+        "chat_id": CHAT_ID,
+        "text": msg
+    }
+    requests.post(url, data=data)
+  msg = "📊 今日选股结果：\n" + "\n".join(result)
+send_telegram(msg)
